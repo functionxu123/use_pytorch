@@ -38,14 +38,14 @@ class NeuralNetwork(nn.Module):
         super(NeuralNetwork, self).__init__()
         #Conv2d(in_channels, out_channels, kernel_size, stride=1,padding=0, dilation=1, groups=1,bias=True, padding_mode=‘zeros’)
         #torch.nn.Linear(in_features, out_features, bias=True, device=None, dtype=None)
-        self.fun_fc1=nn.Linear(2, 2)
-        self.fun_fc2=nn.Linear(2, 2)
+        self.fun_fc1=nn.Linear(2, 3)
+        self.fun_fc2=nn.Linear(3, 2)
         #self.softm=nn.Softmax(dim=1)
 
     def forward(self, x):
         x = self.fun_fc1(x)
         #x = F.relu(x)
-        # x = self.fun_fc2(x)
+        x = self.fun_fc2(x)
         # x = F.relu(x)
         # x = F.max_pool2d(x, 2)
         # x = self.dropout1(x)
@@ -96,6 +96,9 @@ def test_epoch(model, sample_cnt=1000):
     plot_size=4
     plt.xlim((-plot_size,plot_size))#设置x轴范围，设置y轴plt.ylim()
     plt.ylim((-plot_size,plot_size))#
+    #plt.xticks(np.linspace(-plot_size, plot_size, plot_size*10*2) )
+    #plt.yticks(np.linspace(-plot_size, plot_size, plot_size*10*2) )
+    plt.grid()
     
     with torch.no_grad():
         for i in range(int(sample_cnt/batchsize)):

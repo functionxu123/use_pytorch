@@ -22,7 +22,8 @@ batchsize=100
 def GetLabel(x, y):
     #some function make label 0/1 let network guess
     #ret= x**2+y**2<4
-    ret=1.5*x-y>0
+    #ret=1.5*x-y>0
+    ret=x**2>y
     return ret.astype(int)
 
 def show_param(model, word=""):

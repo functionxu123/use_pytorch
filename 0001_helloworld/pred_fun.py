@@ -28,7 +28,7 @@ def GetLabel(x, y):
 
 def show_param(model, word=""):
     print (word)
-    for parameters in model.parameters():
+    for parameters in model.named_parameters():
         print(parameters)
 
 
@@ -38,7 +38,7 @@ class NeuralNetwork(nn.Module):
         super(NeuralNetwork, self).__init__()
         #Conv2d(in_channels, out_channels, kernel_size, stride=1,padding=0, dilation=1, groups=1,bias=True, padding_mode=‘zeros’)
         #torch.nn.Linear(in_features, out_features, bias=True, device=None, dtype=None)
-        self.fun_fc1=nn.Linear(2, 2)
+        self.fun_fc1=nn.Linear(2, 3)
         #self.fun_fc2=nn.Linear(3, 2)
         #self.softm=nn.Softmax(dim=1)
 

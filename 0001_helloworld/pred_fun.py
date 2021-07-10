@@ -145,9 +145,10 @@ def main(model, optimizer, scheduler, maxepoch, eachstep=1000):
     for i in range(maxepoch):
         train_epoch(model, optimizer, eachstep)
         test_epoch(model, 3000)
+        plt.savefig("result.png")
 
         scheduler.step()
-    plt.savefig("result.png")
+    
     plt.close('all')
 
 if __name__ == '__main__':

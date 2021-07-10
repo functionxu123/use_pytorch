@@ -22,8 +22,8 @@ batchsize=100
 def GetLabel(x, y):
     #some function make label 0/1 let network guess
     #ret= x**2+y**2<4
-    #ret=1.5*x-y>0
-    ret=x**2>y
+    ret=1.5*x-y>0
+    #ret=x**2>y
     return ret.astype(int)
 
 def show_param(model, word=""):
@@ -38,14 +38,14 @@ class NeuralNetwork(nn.Module):
         super(NeuralNetwork, self).__init__()
         #Conv2d(in_channels, out_channels, kernel_size, stride=1,padding=0, dilation=1, groups=1,bias=True, padding_mode=‘zeros’)
         #torch.nn.Linear(in_features, out_features, bias=True, device=None, dtype=None)
-        self.fun_fc1=nn.Linear(2, 3)
-        self.fun_fc2=nn.Linear(3, 2)
+        self.fun_fc1=nn.Linear(2, 2)
+        #self.fun_fc2=nn.Linear(3, 2)
         #self.softm=nn.Softmax(dim=1)
 
     def forward(self, x):
         x = self.fun_fc1(x)
         #x = F.relu(x)
-        x = self.fun_fc2(x)
+        #x = self.fun_fc2(x)
         # x = F.relu(x)
         # x = F.max_pool2d(x, 2)
         # x = self.dropout1(x)
@@ -147,6 +147,7 @@ def main(model, optimizer, scheduler, maxepoch, eachstep=1000):
         test_epoch(model, 3000)
 
         scheduler.step()
+    plt.savefig("result.png")
     plt.close('all')
 
 if __name__ == '__main__':
@@ -155,7 +156,7 @@ if __name__ == '__main__':
     #To use the model, we pass it the input data. This executes the model’s forward, along with some background operations. 
     # Do not call model.forward() directly!
 
-    optimizer = optim.SGD(model.parameters(), lr=0.001)
+    optimizer = optim.SGD(model.parameters(), lr=0.0001)
     scheduler = StepLR(optimizer, step_size=1, gamma=0.9)
     main(model, optimizer,scheduler,100, 1000)
 

@@ -143,6 +143,7 @@ def main(model, optimizer, scheduler, maxepoch, eachstep=1000):
     
 
     for i in range(maxepoch):
+        print (i,"/",maxepoch, " Starting  plot_size=",plot_size," eachstep=",eachstep)
         train_epoch(model, optimizer, eachstep)
         test_epoch(model, 3000)
         plt.savefig("result.jpg")
